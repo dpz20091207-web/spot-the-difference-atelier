@@ -4,13 +4,15 @@
 [![rank](https://make.fun/badge/best-spot-the-difference-game-20261121-0451/dpz20091207-web/spot-the-difference-atelier/rank.svg)](https://make.fun/bounty/best-spot-the-difference-game-20261121-0451/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=best-spot-the-difference-game-20261121-0451)
 [![reward](https://make.fun/badge/best-spot-the-difference-game-20261121-0451/dpz20091207-web/spot-the-difference-atelier/reward.svg)](https://make.fun/bounty/best-spot-the-difference-game-20261121-0451?utm_source=github&utm_medium=readme&utm_campaign=best-spot-the-difference-game-20261121-0451)
 
-Spot the Difference — Atelier Edition: a complete spot-the-difference game that runs in a desktop browser from static files, no network requests. Three hand-drawn inline-SVG scenes (Alchemist's Study, Midnight Station, Coral Observatory), seven differences each, shown side by side with markers on the differences found, a counter of how many remain, hints, a timer, score, and sound. Click a difference on either picture to mark it; press H for a hint, R to restart.
+Three hand-drawn worlds to hunt differences in: a neon night market, a coral reef, and an orbital station. Each level shows two near-identical scenes side by side with 7 differences to find — click them on either picture, beat the clock, and use hints sparingly.
 
 ## Run it
 
 ```sh
-mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
+python3 -m http.server --directory game 8000
 ```
+
+Then open http://127.0.0.1:8000/ in a desktop browser. No build step, no network requests: every picture is inline SVG and every sound is synthesized with WebAudio.
 
 ---
 

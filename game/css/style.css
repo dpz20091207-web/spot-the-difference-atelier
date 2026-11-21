@@ -1,0 +1,152 @@
+/* Three Worlds — Spot the Difference. Dark arcade theme, neon accents. */
+
+:root {
+  --bg: #0b1020;
+  --panel: #131a30;
+  --panel-2: #1a2340;
+  --border: #2c3a5e;
+  --text: #eef3f8;
+  --muted: #93a3bd;
+  --accent: #f59e0b;
+  --green: #22c55e;
+  --red: #ef4444;
+  --blue: #38bdf8;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: radial-gradient(circle at top, #18223d 0%, var(--bg) 62%);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+#app { max-width: 1360px; margin: 0 auto; padding: 14px 18px 26px; }
+
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 4px 2px 12px;
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-mark {
+  font-size: 34px; line-height: 1; color: var(--accent);
+  text-shadow: 0 0 18px #f59e0b88;
+}
+.brand h1 { margin: 0; font-size: 26px; letter-spacing: 3px; }
+.subtitle { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+
+.pill-btn, .action-btn {
+  font: inherit; cursor: pointer; color: var(--text);
+  background: var(--panel-2); border: 1px solid var(--border);
+  border-radius: 999px; padding: 8px 16px;
+}
+.pill-btn:hover, .action-btn:hover { border-color: var(--accent); }
+
+.hud {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;
+}
+.hud-pill {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 10px; padding: 8px 14px; font-size: 14px; font-weight: 600;
+}
+.hud-pill.level { color: var(--blue); }
+.hud-pill.found { color: var(--green); border-color: #22c55e66; }
+.hud-pill.remain { color: var(--accent); }
+.hud-pill.score { margin-left: auto; }
+.hud-pill.timer { font-variant-numeric: tabular-nums; }
+
+#stage {
+  position: relative;
+  display: flex; gap: 18px; align-items: stretch;
+}
+.panel {
+  flex: 1 1 0; min-width: 0;
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 14px; overflow: hidden; cursor: crosshair;
+  box-shadow: 0 10px 30px #00000055;
+}
+.panel svg { display: block; width: 100%; height: auto; }
+.panel.shake { animation: shake 0.3s; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+.vs-badge {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 52px; height: 52px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #1a1206;
+  font-weight: 900; font-size: 18px; letter-spacing: 1px;
+  box-shadow: 0 0 0 5px #0b1020, 0 0 24px #f59e0b88; z-index: 3;
+  pointer-events: none;
+}
+
+.mark { animation: pop 0.35s ease-out; transform-box: fill-box; transform-origin: center; }
+@keyframes pop { from { transform: scale(0.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.hint-ring { animation: pulse 0.9s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+.hintbar {
+  display: flex; align-items: center; gap: 14px;
+  margin-top: 12px; flex-wrap: wrap;
+}
+.action-btn { background: #f59e0b22; border-color: #f59e0b88; font-weight: 700; }
+.keys { color: var(--muted); font-size: 13px; }
+.keys kbd {
+  background: var(--panel-2); border: 1px solid var(--border);
+  border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px;
+  font-family: inherit; font-size: 12px;
+}
+
+.toast {
+  position: fixed; left: 50%; bottom: 26px; transform: translate(-50%, 20px);
+  background: #1a2340; border: 1px solid var(--border); color: var(--text);
+  padding: 10px 18px; border-radius: 999px; font-size: 14px;
+  opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s;
+  z-index: 20; box-shadow: 0 8px 24px #00000066;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+.overlay {
+  position: fixed; inset: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: center;
+  background: #050914cc; backdrop-filter: blur(4px); padding: 20px;
+}
+.overlay.hidden { display: none; }
+.card {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 18px; padding: 30px 34px; max-width: 640px; width: 100%;
+  text-align: center; box-shadow: 0 24px 60px #00000088;
+}
+.card.small { max-width: 480px; }
+.eyebrow { color: var(--accent); letter-spacing: 3px; font-size: 12px; font-weight: 800; margin: 0 0 8px; }
+.card h2 { margin: 0 0 10px; font-size: 34px; letter-spacing: 1px; }
+.lede { color: var(--muted); line-height: 1.6; margin: 0 0 20px; }
+.levels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+.level-card {
+  font: inherit; cursor: pointer; color: var(--text); text-align: center;
+  background: var(--panel-2); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px 10px;
+  display: flex; flex-direction: column; gap: 6px; align-items: center;
+}
+.level-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.card-emoji { font-size: 30px; }
+.card-name { font-weight: 800; font-size: 14px; }
+.card-tag { color: var(--muted); font-size: 12px; line-height: 1.4; }
+.primary-btn {
+  font: inherit; font-weight: 800; font-size: 16px; cursor: pointer;
+  color: #1a1206; background: var(--accent); border: none;
+  border-radius: 999px; padding: 13px 30px;
+}
+.primary-btn:hover { filter: brightness(1.08); }
+.fine { color: var(--muted); font-size: 12px; margin: 14px 0 0; }
+
+@media (max-width: 900px) {
+  #stage { flex-direction: column; }
+  .vs-badge { display: none; }
+  .levels { grid-template-columns: 1fr; }
+  .hud-pill.score { margin-left: 0; }
+}
